@@ -130,15 +130,6 @@ GitOps is a DevOps practice that uses Git as the source of truth for declaring a
 
 ---
 
-## 📌 Optional Enhancements
-
-- [ ] Ingress + TLS via cert-manager
-- [ ] GitHub Actions workflow to auto-update manifests
-- [ ] ArgoCD Image Updater for dynamic image tag syncing
-- [ ] Integration with Prometheus + Grafana for observability
-
----
-
 ## 👤 Maintainer
 
 **Debasish Mohanty**  
