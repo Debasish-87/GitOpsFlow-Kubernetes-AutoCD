@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitopsflow-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitopsflow
+  template:
+    metadata:
+      labels:
+        app: gitopsflow
+    spec:
+      containers:
+      - name: web
+        image: debasish8787/gitopsflow-app:latest
+        ports:
+        - containerPort: 80
