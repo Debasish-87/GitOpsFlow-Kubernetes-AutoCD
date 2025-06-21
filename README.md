@@ -1,125 +1,139 @@
 # 🚀 GitOpsFlow-Kubernetes-AutoCD
 
-A fully automated GitOps pipeline using ArgoCD and Kubernetes to deploy a containerized static app directly from GitHub. One-click setup with setup.sh!
+A fully automated GitOps pipeline using **ArgoCD** and **Kubernetes** to deploy a containerized static application directly from **GitHub**. Built for CI/CD enthusiasts, DevOps learners, and cloud-native professionals.
 
 ---
 
-## 📌 Project Objective
+## 🎯 Objective
 
 > Implement GitOps by syncing Kubernetes deployment states directly from a Git repository using ArgoCD.
 
 ---
 
-## 📁 Project Structure
+## 🧱 Project Structure
 
 ```
-
 GitOpsFlow-Kubernetes-AutoCD/
 ├── app/                # Sample static web app (Dockerized)
-├── manifests/          # Kubernetes deployment + service YAMLs
-├── scripts/            # ArgoCD installer and GitOps automation
-├── setup.sh            # One-click project launcher
-└── README.md
-
-````
-
----
-
-## ⚙️ Tools Used
-
-- Kubernetes (Minikube)
-- ArgoCD
-- Docker
-- GitHub
-- Kustomize
-- Bash Scripting
-
----
-
-## 🚀 How to Run This Project
-
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/yourusername/GitOpsFlow-Kubernetes-AutoCD
-   cd GitOpsFlow-Kubernetes-AutoCD
-````
-
-2. Run the full setup:
-
-   ```bash
-   ./setup.sh
-   ```
-
-3. Access ArgoCD UI:
-
-   ```
-   http://localhost:8080
-   ```
-
-4. Login using:
-
-   * Username: admin
-   * Password:
-
-     ```bash
-     kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
-     ```
-
----
-
-## 🔄 GitOps in Action (Screenshots)
-
-| Feature           | Screenshot Placeholder                  |
-| ----------------- | --------------------------------------- |
-| ArgoCD UI         | ![ArgoCD UI](screenshots/argocd-ui.png) |
-| Auto-sync Trigger | ![Sync](screenshots/sync-action.png)    |
-| Deployed App      | ![App](screenshots/app-live.png)        |
-
-Upload your screenshots in a folder: screenshots/
-
----
-
-## 🧠 GitOps Explained
-
-* All K8s manifests live in GitHub
-* ArgoCD watches the repo & auto-syncs changes
-* Git commit = trigger deployment
-
----
-
-## 📄 Resume Line
-
-> Built GitOpsFlow-Kubernetes-AutoCD, a fully automated GitOps pipeline using ArgoCD and Kubernetes to deploy containerized apps directly from GitHub with auto-sync, versioned delivery, and CI/CD integration.
-
----
-
-## 📌 To Do (Optional Enhancements)
-
-* Add ingress with custom domain
-* Add image tag auto-update with ArgoCD Image Updater
-* Use GitHub Actions to update manifests via CI
-
----
-
-## 📬 Contact
-
-> Project by \[Your Name]
-> DockerHub: [https://hub.docker.com/u/debasish8787](https://hub.docker.com/u/debasish8787)
-> GitHub: [https://github.com/yourusername](https://github.com/yourusername)
-
+│   ├── index.html
+│   └── Dockerfile
+├── manifests/          # K8s Deployment & Service manifests (kustomized)
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── kustomization.yaml
+├── scripts/            # ArgoCD install and app creation scripts
+│   ├── install-argocd.sh
+│   └── create-argocd-app.sh
+├── docs/
+│   └── gitops-workflow.md  # GitOps Notes
+├── screenshots/        # Project screenshots (UI, sync, app)
+├── setup.sh            # One-click setup script
+└── README.md           # You are here ✅
 ```
 
-—
+---
 
-📸 Step 8: Add Screenshots
+## 🛠️ Tech Stack & Tools
 
-Take screenshots of:
+- 🐳 Docker (app containerization)
+- ☸️ Kubernetes via Minikube (local cluster)
+- 🚀 ArgoCD (GitOps engine)
+- 🐙 GitHub (source of truth)
+- 🧰 Kustomize (manifest management)
+- 🖥️ Bash scripting (automation)
 
-1. ArgoCD UI after deployment (App synced)
-2. GitHub commit (version update)
-3. Browser showing deployed app
-4. Optional: ArgoCD CLI output
+---
 
-Put them in a screenshots/ folder locally or in your GitHub repo.
+## ⚡ Quickstart
 
-—
+### 🔁 One-Click Setup (Recommended)
+
+```bash
+git clone https://github.com/yourusername/GitOpsFlow-Kubernetes-AutoCD
+cd GitOpsFlow-Kubernetes-AutoCD
+./setup.sh
+```
+
+This script will:
+- Start Minikube
+- Build and push the Docker app
+- Install ArgoCD
+- Auto-create and sync the GitOps app
+- Forward ArgoCD UI to [http://localhost:8080](http://localhost:8080)
+
+### 🔐 ArgoCD Credentials
+
+```bash
+kubectl get secret argocd-initial-admin-secret -n argocd \
+  -o jsonpath="{.data.password}" | base64 -d && echo
+```
+
+- Username: `admin`
+- Password: (use command above)
+
+---
+
+## 🔄 GitOps Flow in Action
+
+| Stage               | Description                                          |
+|---------------------|------------------------------------------------------|
+| 🌀 Init              | App manifests live in Git repo                      |
+| 🎯 Watch             | ArgoCD syncs live K8s state with Git repo          |
+| 🔀 Commit            | A simple `git commit` triggers app update          |
+| ✅ Auto Sync         | ArgoCD auto-syncs without manual deployment         |
+
+📸 **Screenshots** (stored in `screenshots/`):
+
+| Feature               | Preview                                |
+|------------------------|----------------------------------------|
+| ArgoCD UI              | ![](screenshots/argocd-ui.png)         |
+| Git Commit Trigger     | ![](screenshots/github-commit.png)     |
+| Auto Sync Confirmation | ![](screenshots/sync-success.png)      |
+| Live App               | ![](screenshots/browser-app.png)       |
+
+---
+
+## 🧠 Notes: What is GitOps?
+
+GitOps is a DevOps practice that uses Git as the source of truth for declaring and automating infrastructure and application deployments.
+
+> ✅ With Git as the single source of truth, and ArgoCD continuously syncing it to Kubernetes, we eliminate config drift and enable secure, automated, and auditable delivery.
+
+📄 Read full explanation in [`docs/gitops-workflow.md`](docs/gitops-workflow.md)
+
+---
+
+## 💡 Use Cases
+
+- Automating static app deployments
+- Learning GitOps & ArgoCD hands-on
+- Building secure & repeatable CI/CD pipelines
+
+---
+
+## 🧾 Resume Power Line
+
+> Built **GitOpsFlow-Kubernetes-AutoCD**, a production-grade GitOps pipeline using ArgoCD and Kubernetes to deploy containerized apps directly from GitHub with auto-sync, version tracking, and CI/CD integration.
+
+---
+
+## 📌 Optional Enhancements
+
+- [ ] Ingress + TLS via cert-manager
+- [ ] GitHub Actions workflow to auto-update manifests
+- [ ] ArgoCD Image Updater for dynamic image tag syncing
+- [ ] Integration with Prometheus + Grafana for observability
+
+---
+
+## 👤 Maintainer
+
+**Debasish Mohanty**  
+DevSecOps | SRE | Cloud-Native Security  
+- GitHub: [github.com/Debasish-87](https://github.com/Debasish-87)
+- Docker Hub: [docker.com/u/debasish8787](https://hub.docker.com/u/debasish8787)
+- Project Repo: [GitOpsFlow-Kubernetes-AutoCD](https://github.com/Debasish-87/GitOpsFlow-Kubernetes-AutoCD)
+
+---
+
+> 📢 Found it useful? Give it a ⭐️ on GitHub and share it with your DevOps crew!
